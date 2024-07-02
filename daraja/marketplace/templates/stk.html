@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h2>Deposit</h2>
+
+<form id="my-form" hx-post="{% url 'stkpush' %}" hx-target="#result" hx-swap="innerHTML">
+	{% csrf_token %}
+	<input type="number" name="phone" placeholder="phone" required><br><br>
+	<input type="number" name="amount" placeholder="amount" required><br>
+	<button type="submit">Deposit <img style="background-color: None;"  src="{% static 'images/spinning-circles.svg' %}" class="htmx-indicator" width="20px" height="20px">
+	</button>
+
+	<div id="result"></div>
+</form>
+
+{% if error %}
+<p class="error">{{ error }}</p>
+{% endif %}
+
+{% endblock %}
+
